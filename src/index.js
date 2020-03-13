@@ -1,18 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore , applyMiddleware} from 'redux'
-
-
-
-import App from './components/App'
-
-
-
-
-ReactDOM.render(
-
-    <App />,
+import {createStore} from 'redux'
+ 
+ 
+//---------Initial State----------------//
+let initialState={
+    value:"syed",
+     list:[],
+}
   
-    document.querySelector('#root')
-)
+ 
+ 
+//------------------reducer ----------------//
+const ListReducer =(state=initialState, action )=>{
+    switch(action.type){
+    case 'Add_Value':return{
+                        ...state,
+                       list:[...state.list,action.value]
+                      
+                    }
+    default : return state
+    
+    }
+}
+    
+ 
+const store = createStore(ListReducer)
+export default store
